@@ -41,11 +41,14 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-sequelize.authenticate().then(async function () {
+sequelize.authenticate().then(() => {
   console.log('CONNECTION SUCCESSFUL!');
-  await sequelize.sync();
 }).catch(err => {
   console.log('Unable to connect', err);
 }); 
+
+sequelize.sync().then(() => {
+  console.log('');
+});
 
 module.exports = app;
