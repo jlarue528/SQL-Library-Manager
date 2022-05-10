@@ -8,7 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const { Server } = require('http');
 
-const sequelize = require('./models/index').sequelize;
+const sequelize = require('./models').sequelize;
 
 var app = express();
 
@@ -41,10 +41,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-sequelize.authenticate().then(() => {
-  console.log('Connection Successful');
-});
-
-sequelize.sync({ force: true });
+sequelize.authenticate().then(async function () {
+  console.log('CONNECTION SUCCESSFUL!');
+  await sequelize.sync();
+}).catch(err => {
+  console.log('Unable to connect', err);
+}); 
 
 module.exports = app;
