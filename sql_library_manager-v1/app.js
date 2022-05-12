@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const router = express.Router();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -27,6 +28,50 @@ app.use(express.static('public'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+/** 
+ * Handler function to wrap each route
+*/
+function asyncHandler(cb) {
+  return async(req, res, next) => {
+    try{
+      await cb(req,res,next)
+    } catch (error) {
+      res.send(error);
+    }
+  }
+}
+
+/*
+ * Routes
+*/
+router.get('/', asyncHandler(async (req, res) => {
+    res.redirect('/books');
+}));
+
+router.get('/books', asyncHandler(async (req, res) => {
+  res.render('index', { test: 'LANDING PAGE' });
+}));
+
+router.get('/books/new', asyncHandler(async (req, res) => {
+  res.render('new-book', { test: 'NEW BOOK PAGE' });
+}));
+
+router.post('/books/new', asyncHandler(async (req, res) => {
+  res.render('new-book', { test: 'NEW BOOK CREATE PAGE' });
+}));
+
+router.get('/books/:id', asyncHandler(async (req, res) => {
+  res.render('update-book', { test: 'UPDATE SPECIFIC BOOK PAGE'});
+}));
+
+router.post('/books/:id', asyncHandler(async (req, res) => {
+    res.render('update-book', { test: 'POST UPDATE SPECIFIC BOOK PAGE' });
+})); 
+
+router.post('/books/:id/delete', asyncHandler(async (req, res) => {
+  res.render();
+}));
 
 
 /*
