@@ -45,31 +45,31 @@ function asyncHandler(cb) {
 /*
  * Routes
 */
-router.get('/', asyncHandler(async (req, res) => {
-    res.redirect('/books');
-}));
+// app.get('/', asyncHandler(async (req, res) => {
+//     res.redirect('/books');
+// }));
 
-router.get('/books', asyncHandler(async (req, res) => {
+app.get('/books', asyncHandler(async (req, res) => {
   res.render('index', { test: 'LANDING PAGE' });
 }));
 
-router.get('/books/new', asyncHandler(async (req, res) => {
+app.get('/books/new', asyncHandler(async (req, res) => {
   res.render('new-book', { test: 'NEW BOOK PAGE' });
 }));
 
-router.post('/books/new', asyncHandler(async (req, res) => {
+app.post('/books/new', asyncHandler(async (req, res) => {
   res.render('new-book', { test: 'NEW BOOK CREATE PAGE' });
 }));
 
-router.get('/books/:id', asyncHandler(async (req, res) => {
+app.get('/books/:id', asyncHandler(async (req, res) => {
   res.render('update-book', { test: 'UPDATE SPECIFIC BOOK PAGE'});
 }));
 
-router.post('/books/:id', asyncHandler(async (req, res) => {
+app.post('/books/:id', asyncHandler(async (req, res) => {
     res.render('update-book', { test: 'POST UPDATE SPECIFIC BOOK PAGE' });
 })); 
 
-router.post('/books/:id/delete', asyncHandler(async (req, res) => {
+app.post('/books/:id/delete', asyncHandler(async (req, res) => {
   res.render();
 }));
 
@@ -79,6 +79,7 @@ router.post('/books/:id/delete', asyncHandler(async (req, res) => {
 */
 
 app.use((req, res, next) => {
+  console.log(res.statusCode);
   const error = new Error(`Page AIN'T HERE`);
   error.status = 404;
   error.message = 'Sorry, this was not found.'
@@ -105,6 +106,6 @@ sequelize.sync().then(() => {
   console.log('');
 });
 
-app.listen(4000);
+app.listen(5000);
 
 module.exports = app;
