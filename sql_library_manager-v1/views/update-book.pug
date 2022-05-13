@@ -1,1 +1,26 @@
-h1= test
+extends layout.pug
+block content
+
+    h1= title
+ 
+        form(method='POST', action='/handleForm')
+            p
+            label(for='title')
+                input#title(type='text', name='title', value= bookName)
+            p  
+            label(for='author')
+                input#author(type='text', name='author', value= authorName)
+            p
+            label(for='genre')
+                input#genre(type='text', name='genre', value= genre)
+            p
+            label(for='year')
+                input#year(type='year', name='year', value= year)
+        //-     p
+        //-         input(type='submit') Update Book
+       
+        //- form(action='/books/8/delete', method='post')
+        //-     p
+        //-         a(href='all_books.html') Cancel
+        //-     p 
+        //-         input(type='submit', value= 'Delete Book')

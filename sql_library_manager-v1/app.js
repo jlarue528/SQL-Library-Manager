@@ -16,7 +16,7 @@ const sequelize = require('./models').sequelize;
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+//app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(logger('dev'));
@@ -45,28 +45,28 @@ function asyncHandler(cb) {
 /*
  * Routes
 */
-// app.get('/', asyncHandler(async (req, res) => {
-//     res.redirect('/books');
-// }));
+app.get('/', asyncHandler(async (req, res) => {
+    res.redirect('/books');
+}));
 
 app.get('/books', asyncHandler(async (req, res) => {
-  res.render('index', { test: 'LANDING PAGE' });
+  res.render('index', { test: 'LANDING PAGE', title: "booksssss"});
 }));
 
 app.get('/books/new', asyncHandler(async (req, res) => {
-  res.render('new-book', { test: 'NEW BOOK PAGE' });
+  res.render('new-book', { test: 'NEW BOOK PAGE', title: 'New Book' });
 }));
 
 app.post('/books/new', asyncHandler(async (req, res) => {
-  res.render('new-book', { test: 'NEW BOOK CREATE PAGE' });
+  res.render('new-book', { test: 'NEW BOOK CREATE PAGE', title: 'New Book' });
 }));
 
-app.get('/books/:id', asyncHandler(async (req, res) => {
-  res.render('update-book', { test: 'UPDATE SPECIFIC BOOK PAGE'});
+app.get('/books/update', asyncHandler(async (req, res) => {
+  res.render('update-book', { test: 'UPDATE SPECIFIC BOOK PAGE', title: 'Update Book', bookName: 'HARRY POTTER', authorName: 'JK', genre: 'Fantasy', year: 2008});
 }));
 
 app.post('/books/:id', asyncHandler(async (req, res) => {
-    res.render('update-book', { test: 'POST UPDATE SPECIFIC BOOK PAGE' });
+    res.render('update-book', { test: 'POST UPDATE SPECIFIC BOOK PAGE', title: 'Update Book'});
 })); 
 
 app.post('/books/:id/delete', asyncHandler(async (req, res) => {
@@ -79,7 +79,6 @@ app.post('/books/:id/delete', asyncHandler(async (req, res) => {
 */
 
 app.use((req, res, next) => {
-  console.log(res.statusCode);
   const error = new Error(`Page AIN'T HERE`);
   error.status = 404;
   error.message = 'Sorry, this was not found.'
@@ -93,6 +92,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
   err.message = err.message || `Uh oh - looks like our server is acting up`;
+  console.log(err.message);
   res.render('error', { err }); 
 });
 
