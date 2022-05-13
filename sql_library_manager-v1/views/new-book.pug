@@ -1,42 +1,28 @@
-//- h1= test
+extends layout.pug
+block content
+    
+    h1= title
 
-//- //- <!DOCTYPE html>
-//- //- <html>
+    if error === true
+        error.error
 
-//- //- <head>
-//- //-     <title>New Book</title>
-//- //-     <link rel="stylesheet" href="../public/stylesheets/style.css">
-//- //- </head>
-
-//- extends layout.pug
-//- block content
-
-//- <body>
-//-     <h1>New Book</h1>
-//-     <form>
-//-         <p>
-//-             <label for="title">Title</label>
-//-             <input name="title" type="text" id="title">
-//-         </p>
-//-         <p>
-//-             <label for="author">Author</label>
-//-             <input name="author" type="text" id="author">
-//-         </p>
-//-         <p>
-//-             <label for="genre">Genre</label>
-//-             <input name="genre" type="text" id="genre">
-//-         </p>
-//-         <p>
-//-             <label for="year">Year</label>
-//-             <input name="year" type="text" id="year">
-//-         </p>
-//-         <p>
-//-             <input type="submit" value="Create New Book">
-//-         </p>
-//-         <p>
-//-             <a class="button" href="all_books.html">Cancel</a>
-//-         </p>
-//-     </form>
-//- </body>
-
-//- //- </html>
+    form(method= 'POST', action='/books/')
+        p
+            label(for='title') Title
+                input#title(type='text', name='title')
+        p  
+            label(for='author') Author
+                input#author(type='text', name='author')
+        p
+            label(for='genre') Genre
+                input#genre(type='text', name='genre')
+        p
+            label(for='year') Year
+                input#year(type='year', name='year')
+        p
+            input(
+                type='submit',
+                value='Create New Book'
+            )
+        p
+            a(class='button', href='/books') Cancel
