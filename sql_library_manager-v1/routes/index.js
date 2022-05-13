@@ -15,7 +15,7 @@ function asyncHandler(cb) {
   }
 }
 
-/* GET home page. */
+/* GET Landing Page */
 router.get('/', asyncHandler( async (req, res) => {
   res.redirect('/books');
 }));
@@ -25,10 +25,12 @@ router.get('/books', asyncHandler(async (req, res) => {
   res.render('index', { books: allBooks, title: 'Books'});
 }));
 
+/* GET New Book Page */
 router.get('/books/new', asyncHandler(async (req, res) => {
   res.render('new-book', { title: 'New Book' });
 }));
 
+/* POST New Book Page */
 router.post('/books/new', asyncHandler(async (req, res) => {
   let book;
   try {
@@ -44,6 +46,7 @@ router.post('/books/new', asyncHandler(async (req, res) => {
   }
 }));
 
+/* GET Book Page */
 router.get('/books/:id', asyncHandler(async (req, res) => {
     const book = await Book.findByPk(req.params.id);
     if(book) {
@@ -53,6 +56,7 @@ router.get('/books/:id', asyncHandler(async (req, res) => {
     } 
 }));
 
+/* POST Book Update Page */
 router.post('/books/:id', asyncHandler(async (req, res) => {
     let book;
     try {
@@ -72,6 +76,7 @@ router.post('/books/:id', asyncHandler(async (req, res) => {
     }
 })); 
 
+/* POST Delete Book */
 router.post('/books/:id/delete', asyncHandler(async (req, res) => {
   const book = await Book.findByPk(req.params.id);
   if(book) {

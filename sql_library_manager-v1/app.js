@@ -27,7 +27,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public'));
 
 app.use('/', indexRouter);
-//app.use('/users', usersRouter);
 
 /*
   404 Error Handler
@@ -58,9 +57,9 @@ sequelize.authenticate().then(() => {
 }); 
 
 sequelize.sync().then(() => {
-  console.log('');
+  console.log('Models Synced');
 });
 
-app.listen(5000);
+app.listen(3000);
 
 module.exports = app;
