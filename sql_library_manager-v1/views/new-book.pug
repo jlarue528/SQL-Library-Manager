@@ -4,9 +4,10 @@ block content
     h1= title
 
     if error === true
-        error.error
+        p 
+            error.error
 
-    form(method= 'POST', action='/books/')
+    form(method= 'POST', action='/books/new')
         p
             label(for='title') Title
                 input#title(type='text', name='title')
