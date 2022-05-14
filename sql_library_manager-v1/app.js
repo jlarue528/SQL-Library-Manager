@@ -44,7 +44,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
   err.message = err.message || `Uh oh - looks like our server is acting up`;
-  console.log(err.message);
+  console.log('ERROR:', err.message);
   res.render('error', { err }); 
 });
 
