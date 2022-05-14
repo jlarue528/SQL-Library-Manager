@@ -3,9 +3,11 @@ block content
     
     h1= title
 
-    if error === true
+    if errors
         p 
-            error.error
+            ul  
+                each error in errors
+                    li= error.message
 
     form(method= 'POST', action='/books/new')
         p
