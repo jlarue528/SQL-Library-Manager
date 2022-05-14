@@ -8,7 +8,7 @@ block content
  
         form(method='post', action='/books/')
             p
-            label(for='title') Title
+            label(for='title', onclick={}) Title
                 input#title(type='text', name='title', value= book.title)
             p  
             label(for='author') Author
