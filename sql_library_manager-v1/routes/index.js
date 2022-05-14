@@ -63,6 +63,7 @@ router.post('/books/:id', asyncHandler(async (req, res) => {
       const book = await Book.findByPk(req.params.id);
       if(book) {
         await book.update(req.body);
+        await book.save();
         res.redirect('/books/' + book.id);
       } else {
         res.render('page-not-found');

@@ -6,7 +6,6 @@ var logger = require('morgan');
 const router = express.Router();
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 const { Server } = require('http');
 const e = require('express');
 const { restart } = require('nodemon');
@@ -16,7 +15,6 @@ const sequelize = require('./models').sequelize;
 var app = express();
 
 // view engine setup
-//app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(logger('dev'));

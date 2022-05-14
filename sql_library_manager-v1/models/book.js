@@ -14,18 +14,27 @@ module.exports = (sequelize) => {
     }
   }
   Book.init({
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     title: {
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true
+        notEmpty: {
+          msg: 'Title is required'
+        }
       }
     },
     author: {
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true
+        notEmpty: {
+          msg: 'Author is a required.'
+        }
       }
     },
     genre: Sequelize.STRING,
@@ -34,6 +43,6 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'Book',
   });
-  
+
   return Book;
 };
