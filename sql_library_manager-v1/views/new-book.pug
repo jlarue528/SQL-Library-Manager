@@ -4,24 +4,25 @@ block content
     h1= title
 
     if errors
+        h2.error OOOPS!
         p 
             ul  
                 each error in errors
-                    li= error.message
+                    li.error= error.message
 
     form(method= 'POST', action='/books/new')
         p
             label(for='title') Title
-                input#title(type='text', name='title')
+            input#title(type='text', name='title')
         p  
             label(for='author') Author
-                input#author(type='text', name='author')
+            input#author(type='text', name='author')
         p
             label(for='genre') Genre
-                input#genre(type='text', name='genre')
+            input#genre(type='text', name='genre')
         p
             label(for='year') Year
-                input#year(type='year', name='year')
+            input#year(type='text', name='year')
         p
             input(
                 type='submit',
